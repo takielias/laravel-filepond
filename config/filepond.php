@@ -11,20 +11,17 @@ return [
     | upon running the "artisan filepond:clear" command.
     |
     */
-    'disk' => env('FILEPOND_DISK', 'filepond'),
+    'disk' => env('FILEPOND_DISK', 'local'),
 
     /*
     |--------------------------------------------------------------------------
-    | Laravel Disks Config
+    | Specify File Upload Temp Directory
     |--------------------------------------------------------------------------
     |
-    | This is disk configuration for Laravel ./config/filesystem.php
+    | This is disk configuration for temporary sub directory
     |
     */
-    'storage' => [
-        'driver' => 'local',
-        'root' => storage_path('app/filepond'),
-    ],
+    'temp_dir' => 'temp',
 
     /*
     |--------------------------------------------------------------------------
@@ -46,7 +43,7 @@ return [
     | Determine whether to enable or disable soft delete in FilePond model.
     |
     */
-    'soft_delete' => true,
+    'soft_delete' => false,
 
     /*
     |--------------------------------------------------------------------------

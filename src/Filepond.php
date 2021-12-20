@@ -2,7 +2,6 @@
 
 namespace RahulHaque\Filepond;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -11,7 +10,7 @@ class Filepond extends AbstractFilepond
     /**
      * Set the FilePond field name
      *
-     * @param  string|array  $field
+     * @param string|array $field
      * @return $this
      */
     public function field($field)
@@ -56,7 +55,7 @@ class Filepond extends AbstractFilepond
     /**
      * Copy the FilePond files to destination
      *
-     * @param  string  $path
+     * @param string $path
      * @return array
      */
     public function copyTo(string $path)
@@ -69,29 +68,30 @@ class Filepond extends AbstractFilepond
             $response = [];
             $fileponds = $this->getFieldModel();
             foreach ($fileponds as $index => $filepond) {
-                $from = Storage::disk($filepond->disk)->path($filepond->filepath);
-                $to = $path.'-'.($index + 1).'.'.$filepond->extension;
-                File::copy($from, $to);
-                $response[] = array_merge(['id' => $filepond->id], pathinfo($to));
+                $to = $path . '/' . time() . uniqid() . '-' . ($index + 1) . '.' . $filepond->extension;
+                Storage::disk($filepond->disk)->copy($filepond->filepath, $to);
+                $filePath = pathinfo($to);
+                $response[] = array_merge(['id' => $filepond->id, 'file_url' => $filePath['dirname'] . '/' . $filePath['basename']], $filePath);;
             }
             return $response;
         }
 
         $filepond = $this->getFieldModel();
-        $from = Storage::disk($filepond->disk)->path($filepond->filepath);
-        $to = $path.'.'.$filepond->extension;
-        File::copy($from, $to);
-        return array_merge(['id' => $filepond->id], pathinfo($to));
+        $to = $path . '/' . time() . uniqid() . '.' . $filepond->extension;
+        Storage::disk($filepond->disk)->copy($filepond->filepath, $to);
+        $filePath = pathinfo($to);
+        return array_merge(['id' => $filepond->id, 'file_url' => $filePath['dirname'] . '/' . $filePath['basename']], $filePath);
     }
 
     /**
      * Copy the FilePond files to destination and delete
      *
-     * @param  string  $path
+     * @param string $path
      * @return array
      */
     public function moveTo(string $path)
     {
+
         if (!$this->getFieldValue()) {
             return null;
         }
@@ -100,29 +100,27 @@ class Filepond extends AbstractFilepond
             $response = [];
             $fileponds = $this->getFieldModel();
             foreach ($fileponds as $index => $filepond) {
-                $from = Storage::disk($filepond->disk)->path($filepond->filepath);
-                $to = $path.'-'.($index + 1).'.'.$filepond->extension;
-                File::copy($from, $to);
-                $response[] = array_merge(['id' => $filepond->id], pathinfo($to));
-                $this->getIsSoftDeletable() ? $filepond->delete() : $filepond->forceDelete();
+                $to = $path . '/' . time() . uniqid() . '-' . ($index + 1) . '.' . $filepond->extension;
+                Storage::disk($filepond->disk)->move($filepond->filepath, $to);
+                $filePath = pathinfo($to);
+                $response[] = array_merge(['id' => $filepond->id, 'file_url' => $filePath['dirname'] . '/' . $filePath['basename']], $filePath);;
             }
             return $response;
         }
 
         $filepond = $this->getFieldModel();
-        $from = Storage::disk($filepond->disk)->path($filepond->filepath);
-        $to = $path.'.'.$filepond->extension;
-        File::copy($from, $to);
-        $this->getIsSoftDeletable() ? $filepond->delete() : $filepond->forceDelete();
-        return array_merge(['id' => $filepond->id], pathinfo($to));
+        $to = $path . '/' . time() . uniqid() . '.' . $filepond->extension;
+        Storage::disk($filepond->disk)->move($filepond->filepath, $to);
+        $filePath = pathinfo($to);
+        return array_merge(['id' => $filepond->id, 'file_url' => $filePath['dirname'] . '/' . $filePath['basename']], $filePath);
     }
 
     /**
      * Validate a file from temporary storage
      *
-     * @param  array  $rules
-     * @param  array  $messages
-     * @param  array  $customAttributes
+     * @param array $rules
+     * @param array $messages
+     * @param array $customAttributes
      * @return void
      * @throws \Illuminate\Validation\ValidationException
      */

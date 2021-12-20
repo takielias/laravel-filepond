@@ -20,8 +20,8 @@ class FilepondService
     /**
      * Validate the filepond file
      *
-     * @param  Request  $request
-     * @param  array  $rules
+     * @param Request $request
+     * @param array $rules
      * @return \Illuminate\Contracts\Validation\Validator
      */
     public function validator(Request $request, array $rules)
@@ -34,7 +34,7 @@ class FilepondService
     /**
      * Store the uploaded file in the fileponds table
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return mixed
      */
     public function store(Request $request)
@@ -42,7 +42,7 @@ class FilepondService
         $file = $this->getUploadedFile($request);
 
         return Filepond::create([
-            'filepath' => $file->store('', config('filepond.disk', 'filepond')),
+            'filepath' => $file->store(config('filepond.temp_dir', 'temp'), config('filepond.disk', 'filepond')),
             'filename' => $file->getClientOriginalName(),
             'extension' => $file->getClientOriginalExtension(),
             'mimetypes' => $file->getClientMimeType(),
@@ -55,7 +55,7 @@ class FilepondService
     /**
      * Retrieve the filepond file from encrypted text
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return mixed
      */
     public function retrieve(Request $request)
@@ -71,7 +71,7 @@ class FilepondService
     /**
      * Encrypt the identifier for filepond
      *
-     * @param  array  $identifier
+     * @param array $identifier
      * @return string
      */
     public function encrypt(array $identifier)
@@ -82,7 +82,7 @@ class FilepondService
     /**
      * Decrypt the identifier from filepond
      *
-     * @param  string  $identifier
+     * @param string $identifier
      * @return mixed
      */
     public function decrypt(string $identifier)
@@ -93,7 +93,7 @@ class FilepondService
     /**
      * Delete the filepond file and record respecting soft delete
      *
-     * @param  Filepond  $filepond
+     * @param Filepond $filepond
      */
     public function delete(Filepond $filepond)
     {
