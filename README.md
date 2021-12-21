@@ -1,7 +1,7 @@
 # Laravel FilePond Backend
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/rahulhaque/laravel-filepond.svg?style=flat-square)](https://packagist.org/packages/rahulhaque/laravel-filepond)
-[![Total Downloads](https://img.shields.io/packagist/dt/rahulhaque/laravel-filepond.svg?style=flat-square)](https://packagist.org/packages/rahulhaque/laravel-filepond)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/takielias/laravel-filepond.svg?style=flat-square)](https://packagist.org/packages/takielias/laravel-filepond)
+[![Total Downloads](https://img.shields.io/packagist/dt/takielias/laravel-filepond.svg?style=flat-square)](https://packagist.org/packages/takielias/laravel-filepond)
 
 A straight forward backend support for Laravel application to work with [FilePond](https://pqina.nl/filepond/) file upload javascript library. This package keeps tracks of all the uploaded files and provides an easier interface for the user to interact with the files. Supports both single and multiple file uploads. Has options for global server side validation for temporary files along with controller level validation before movine the files to final location. It also comes with an artisan command to clean up temporary files after they have expired.
 
@@ -10,13 +10,7 @@ A straight forward backend support for Laravel application to work with [FilePon
 Install the package via composer:
 
 ```bash
-composer require rahulhaque/laravel-filepond
-```
-
-Laravel 7 users use the 7.x-dev version.
-
-```bash
-composer require rahulhaque/laravel-filepond "~7.x-dev"
+composer require takielias/laravel-filepond
 ```
 
 Publish the configuration and migration files.
@@ -145,11 +139,16 @@ class UserAvatarController extends Controller
 
 This is the quickest way to get started. This package has already implemented all the classes and controllers for you. Next we will discuss about all the nitty gritty stuffs available.
 
-> **Important:** If you have Laravel debugbar installed, make sure to add `filepond*` in the `except` array of the `./config/debugbar.php` to ignore appending debugbar information.  
+> **Important:** If you have Laravel debug bar installed, make sure to add `filepond*` in the `except` array of the `./config/debugbar.php` to ignore appending debug bar information.  
 
 ## Configuration
 
 First have a look at the `./config/filepond.php` to know about all the options available out of the box. Some important ones mentioned below.
+
+## Change filesystem disk
+
+Default disk is `local`. You may change it from your .env file as 
+`FILEPOND_DISK=S3`
 
 #### Validation Rules
 
@@ -241,11 +240,11 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ### Security
 
-If you discover any security related issues, please email rahulhaque07@gmail.com instead of using the issue tracker.
+If you discover any security related issues, please email takielias07@gmail.com instead of using the issue tracker.
 
 ## Credits
 
--   [Rahul Haque](https://github.com/rahulhaque)
+-   [Rahul Haque](https://github.com/takielias)
 -   [All Contributors](../../contributors)
 
 ## License
