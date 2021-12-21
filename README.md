@@ -1,7 +1,7 @@
 # Laravel FilePond Backend
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/takielias/laravel-filepond.svg?style=flat-square)](https://packagist.org/packages/takielias/laravel-filepond)
-[![Total Downloads](https://img.shields.io/packagist/dt/takielias/laravel-filepond.svg?style=flat-square)](https://packagist.org/packages/takielias/laravel-filepond)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/rahulhaque/laravel-filepond.svg?style=flat-square)](https://packagist.org/packages/rahulhaque/laravel-filepond)
+[![Total Downloads](https://img.shields.io/packagist/dt/rahulhaque/laravel-filepond.svg?style=flat-square)](https://packagist.org/packages/rahulhaque/laravel-filepond)
 
 A straight forward backend support for Laravel application to work with [FilePond](https://pqina.nl/filepond/) file upload javascript library. This package keeps tracks of all the uploaded files and provides an easier interface for the user to interact with the files. Supports both single and multiple file uploads. Has options for global server side validation for temporary files along with controller level validation before movine the files to final location. It also comes with an artisan command to clean up temporary files after they have expired.
 
@@ -10,7 +10,7 @@ A straight forward backend support for Laravel application to work with [FilePon
 Install the package via composer:
 
 ```bash
-composer require takielias/laravel-filepond
+composer require rahulhaque/laravel-filepond
 ```
 
 Publish the configuration and migration files.
@@ -240,11 +240,11 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ### Security
 
-If you discover any security related issues, please email takielias07@gmail.com instead of using the issue tracker.
+If you discover any security related issues, please email rahulhaque07@gmail.com instead of using the issue tracker.
 
 ## Credits
 
--   [Rahul Haque](https://github.com/takielias)
+-   [Rahul Haque](https://github.com/rahulhaque)
 -   [All Contributors](../../contributors)
 
 ## License
